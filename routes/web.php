@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/visualisasi', [VisualisasiController::class, 'index'])->name('visualisasi');
+    Route::get('/visualisasi/pengguna', [VisualisasiController::class, 'pengguna'])->name('visualisasi.pengguna');
     Route::get('/forecasting', [ForecastingController::class, 'index'])->name('forecasting');
 
     Route::resource('riwayat-berita', BeritaController::class)->middleware('auth');
