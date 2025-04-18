@@ -1,39 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container font-sans text-sm text-[#5a6570]">
+<div class="font-sans text-xs text-[#5a6570]">
 
-    {{-- Judul --}}
-    <h1 class="text-lg font-bold text-left mb-2">Visualisasi Data</h1>
+    <h4 class="fw-bold mb-4 px-3">Visualisasi Data Pengguna</h4>
 
-    {{-- Dropdown Pilihan Visualisasi --}}
-    <div class="mb-2 text-left">
-        <label for="filterRole">Pilih Visualisasi:</label>
-        <select id="filterRole" 
-                class="ml-2 px-3 py-1 border border-gray-300 rounded"
-                onchange="updateChart(this.value)">
-            <option value="pie">Seluruh Pengguna</option>
-            <option value="admin">Visualisasi Data Admin</option>
-            <option value="sopir">Visualisasi Data Sopir</option>
-            <option value="user">Visualisasi Data Masyarakat</option>
-        </select>
-    </div>
+    <div class="bg-white px-5 py-4 rounded shadow mb-6" style="width: 100%; min-height: 500px; margin-left: 0; margin-right: 0;">
+        {{-- Dropdown Pilihan Visualisasi --}}
+        <div class="mb-4 text-left">
+            <label for="filterRole">Pilih Visualisasi:</label>
+            <select id="filterRole" 
+                    class="ml-2 px-3 py-1 border border-gray-300 rounded"
+                    onchange="updateChart(this.value)">
+                <option value="pie">Seluruh Pengguna</option>
+                <option value="admin">Visualisasi Data Admin</option>
+                <option value="sopir">Visualisasi Data Sopir</option>
+                <option value="user">Visualisasi Data Masyarakat</option>
+            </select>
+        </div>
 
-    {{-- Tombol Kembali --}}
-    <div class="mb-6 text-left">
-        <a href="{{ route('visualisasi') }}" 
-           class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded shadow">
-            ← Kembali
-        </a>
-    </div>
+        {{-- Tombol Kembali --}}
+        <div class="mb-4 text-left">
+            <a href="{{ route('visualisasi') }}" 
+               class="text-white px-4 py-2 rounded shadow"
+               style="background-color: #ffc107; transition: background-color 0.3s;"
+               onmouseover="this.style.backgroundColor='#f9e79f'"
+               onmouseout="this.style.backgroundColor='#ffc107'">
+                ← Kembali
+            </a>
+        </div>
 
-    {{-- Chart di Tengah --}}
-    <div class="flex justify-center items-center">
-        <div style="width: 100%; max-width: 500px;">
-            <canvas id="userChart"></canvas>
+        {{-- Chart perfectly centered horizontally --}}
+        <div class="d-flex justify-content-center align-items-center" style="width: 100%;">
+            <div style="width: 500px; height: 400px;" class="text-center">
+                <canvas id="userChart"></canvas>
+            </div>
         </div>
     </div>
-
 </div>
 
 {{-- Chart.js CDN --}}
@@ -42,7 +45,7 @@
     const ctx = document.getElementById('userChart').getContext('2d');
 
     const userData = {
-        labels: ['Admin', 'Sopir', 'User'],
+        labels: ['Admin', 'Sopir', 'Masyarakat'],
         data: [{{ $data['admin'] }}, {{ $data['sopir'] }}, {{ $data['user'] }}],
         colors: ['#28a745', '#ffc107', '#f9e79f']
     };
@@ -62,13 +65,14 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'bottom',
                         labels: {
                             color: '#5a6570',
                             font: {
-                                size: 12
+                                size: 10
                             }
                         }
                     }
@@ -93,7 +97,7 @@
             data = [userData.data[1]];
             colors = [userData.colors[1]];
         } else if (role === 'user') {
-            labels = ['User'];
+            labels = ['Masyarakat'];
             data = [userData.data[2]];
             colors = [userData.colors[2]];
         }
@@ -111,19 +115,20 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true,
                         ticks: {
                             color: '#5a6570',
                             stepSize: 1,
-                            font: { size: 12 }
+                            font: { size: 10 }
                         }
                     },
                     x: {
                         ticks: {
                             color: '#5a6570',
-                            font: { size: 12 }
+                            font: { size: 10 }
                         }
                     }
                 },
