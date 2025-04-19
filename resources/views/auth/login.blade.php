@@ -51,15 +51,21 @@
                         </span>
                     @enderror
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+                <div class="mb-3 position-relative">
+    <label for="password" class="form-label">Password</label>
+    <div class="input-group">
+        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+        <span class="input-group-text" style="cursor: pointer; background: none; border-left: 0;">
+            <img id="togglePassword" src="{{ asset('assets/img/vieww.png') }}" alt="Toggle Password" width="20" />
+        </span>
+    </div>
+    @error('password')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+</div>
+
                 <div class="mb-3">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -84,5 +90,22 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+    let isPasswordVisible = false;
+
+    togglePassword.addEventListener('click', function () {
+        isPasswordVisible = !isPasswordVisible;
+        passwordField.type = isPasswordVisible ? 'text' : 'password';
+        togglePassword.src = isPasswordVisible 
+            ? "{{ asset('assets/img/hide.png') }}" 
+            : "{{ asset('assets/img/vieww.png') }}";
+    });
+</script>
+
+
+
 </body>
 </html>

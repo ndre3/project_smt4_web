@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use app\Models\User;
 use App\Models\Sampah;
+use app\Models\Berita;
 
 class VisualisasiController extends Controller
 {
@@ -27,7 +28,7 @@ class VisualisasiController extends Controller
 
     public function laporan()
     {
-        //
+        return view('pages.visualisasi_laporan');
     }
 
     public function sampah()

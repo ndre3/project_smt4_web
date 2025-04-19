@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/visualisasi', [VisualisasiController::class, 'index'])->name('visualisasi');
     Route::get('/visualisasi/pengguna', [VisualisasiController::class, 'pengguna'])->name('visualisasi.pengguna');
+    Route::get('/visualisasi/laporan', [VisualisasiController::class, 'laporan'])->name('visualisasi.laporan');
     Route::get('/visualisasi/sampah', [VisualisasiController::class, 'sampah'])->name('visualisasi.sampah');
     Route::get('/api/sampah-data', [VisualisasiController::class, 'getFilteredData']);    
     Route::get('/forecasting', [ForecastingController::class, 'index'])->name('forecasting');
